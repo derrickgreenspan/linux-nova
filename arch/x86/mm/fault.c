@@ -1339,6 +1339,7 @@ void do_user_addr_fault(struct pt_regs *regs,
 	if (unlikely(hw_error_code & X86_PF_RSVD))
 		pgtable_bad(regs, hw_error_code, address);
 
+
 	/*
 	 * If SMAP is on, check for invalid kernel (supervisor) access to user
 	 * pages in the user address space.  The odd case here is WRUSS,
@@ -1457,9 +1458,11 @@ good_area:
 
 	if (hw_error_code & X86_PF_WRITE) {
 		/* write, present and write, not present: */
-		if (vma->original_write && vma->vm_ops &&
+		if (vma->original_write &&  vma->vm_ops &&
 					vma->vm_ops->dax_cow) {
 			up_read(&mm->mmap_sem);
+
+			printk("Faulting %p", vma);
 			vma->vm_ops->dax_cow(vma, address);
 			down_read(&mm->mmap_sem);
 		}

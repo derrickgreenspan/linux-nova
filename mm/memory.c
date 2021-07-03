@@ -1533,6 +1533,7 @@ static vm_fault_t insert_pfn(struct vm_area_struct *vma, unsigned long addr,
 	pte = get_locked_pte(mm, addr, &ptl);
 	if (!pte)
 		return VM_FAULT_OOM;
+	goto skip;
 	if (!pte_none(*pte)) {
 		if (mkwrite) {
 			/*
@@ -1556,6 +1557,7 @@ static vm_fault_t insert_pfn(struct vm_area_struct *vma, unsigned long addr,
 		}
 		goto out_unlock;
 	}
+skip:
 
 	/* Ok, finally just insert the thing.. */
 	if (pfn_t_devmap(pfn))

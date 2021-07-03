@@ -1203,7 +1203,7 @@ int nova_insert_write_vma(struct vm_area_struct *vma)
 
 	item->vma = vma;
 
-	nova_dbgv("Inode %lu insert vma %p, start 0x%lx, end 0x%lx, pgoff %lu\n",
+	nova_dbg("Inode %lu insert vma %p, start 0x%lx, end 0x%lx, pgoff %lu\n",
 			inode->i_ino, vma, vma->vm_start, vma->vm_end,
 			vma->vm_pgoff);
 
@@ -1316,7 +1316,7 @@ static int nova_remove_write_vma(struct vm_area_struct *vma)
 	return 0;
 }
 
-#if 0
+//#if 0
 static int nova_restore_page_write(struct vm_area_struct *vma,
 	unsigned long address)
 {
@@ -1335,7 +1335,7 @@ static int nova_restore_page_write(struct vm_area_struct *vma,
 
 	return 0;
 }
-#endif
+//#endif
 
 static void nova_vma_open(struct vm_area_struct *vma)
 {
@@ -1370,6 +1370,6 @@ const struct vm_operations_struct nova_dax_vm_ops = {
 	.pfn_mkwrite = nova_dax_pfn_mkwrite,
 	.open = nova_vma_open,
 	.close = nova_vma_close,
-//	.dax_cow = nova_restore_page_write,
+	.dax_cow = nova_restore_page_write,
 };
 

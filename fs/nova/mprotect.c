@@ -302,6 +302,7 @@ int nova_mmap_to_new_blocks(struct vm_area_struct *vma,
 
 	entryc = (metadata_csum == 0) ? entry : &entry_copy;
 
+	
 	while (start_blk < end_blk) {
 		entry = nova_get_write_entry(sb, sih, start_blk);
 		if (!entry) {
@@ -450,11 +451,8 @@ static int nova_set_vma_read(struct vm_area_struct *vma)
 	if (oldflags == newflags)
 		goto out;
 
-	nova_dbgv("Set vma %p read, start 0x%lx, end 0x%lx\n",
-				vma, vma->vm_start,
-				vma->vm_end);
-
 	new_page_prot = vm_get_page_prot(newflags);
+
 	change_protection(vma, vma->vm_start, vma->vm_end,
 				new_page_prot, 0, 0);
 	vma->original_write = 1;
