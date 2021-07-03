@@ -757,10 +757,13 @@ static void insert_pfn_pmd(struct vm_area_struct *vma, unsigned long addr,
 	ptl = pmd_lock(mm, pmd);
 	if (!pmd_none(*pmd)) {
 		if (write) {
+			/* It's the same junk as in mm/memory.c... */
+			/*/
 			if (pmd_pfn(*pmd) != pfn_t_to_pfn(pfn)) {
 				WARN_ON_ONCE(!is_huge_zero_pmd(*pmd));
 				goto out_unlock;
 			}
+			*/
 			entry = pmd_mkyoung(*pmd);
 			entry = maybe_pmd_mkwrite(pmd_mkdirty(entry), vma);
 			if (pmdp_set_access_flags(vma, addr, pmd, entry, 1))
