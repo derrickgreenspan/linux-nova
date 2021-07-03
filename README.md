@@ -1,5 +1,7 @@
 # NOVA: NOn-Volatile memory Accelerated log-structured file system
 
+## Fixed snapshots. Nota bene, msync() doesn't work. 
+
 ### Linux versions supported
 5.1 (current master), 5.0, 4.19, 4.18, 4.14, 4.13. Checkout each branch if you are interested.
 
