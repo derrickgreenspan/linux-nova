@@ -1,7 +1,7 @@
 # NOVA: NOn-Volatile memory Accelerated log-structured file system
 
-=======
->>>>>>> 5.1
+# Note -- this version properly supports snapshots.
+
 ### Linux versions supported
 5.1 (current master), 5.0, 4.19, 4.18, 4.14, 4.13. Checkout each branch if you are interested.
 
